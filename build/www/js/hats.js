@@ -29,7 +29,7 @@
             var $bless = $bonzi.children(".bonzi_blessed");
             if (u && u.color === "blessed") {
                 if (!$bless.length) {
-                    $bless = $("<img class='bonzi_blessed' alt='' src='./img/blessed_overlay.png'>").css({
+                    $bless = $("<img class='bonzi_blessed' alt='' src='./img/bonzi/blessed.png'>").css({
                         position: "absolute",
                         left: 0, top: 0,
                         width: size.x + "px",
