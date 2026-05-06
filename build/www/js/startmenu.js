@@ -348,15 +348,6 @@
             var src = String(d.vid || "");
             showMedia(d.guid, '<iframe src="' + src + '" frameborder="0" allowfullscreen></iframe>');
         });
-        window.socket.on("letsplay", function (d) {
-            showMedia(d.guid, '<iframe src="' + String(d.vid || "") + '" frameborder="0" allowfullscreen></iframe>');
-        });
-        window.socket.on("letsplay2", function (d) {
-            showMedia(d.guid, '<iframe src="rio/index.html" frameborder="0" allowfullscreen></iframe>');
-        });
-        window.socket.on("letsplay3", function (d) {
-            showMedia(d.guid, '<iframe src="zuma/index.html" frameborder="0" allowfullscreen></iframe>');
-        });
         window.socket.on("poll", function (d) {
             showPoll(d.guid, d.data);
         });
