@@ -24,6 +24,7 @@
     <script src="./js/lib/espeak/espeak.js"></script>
     <script src="./js/lib/jquery.contextMenu.min.js"></script>
     <script src="./cordova.js"></script>
+    <script src="./js/mswindow.js"></script>
     <script src="./js/platform.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/platform.css">
     <script>window.usersPublic = window.usersPublic || {}; window.usersKeys = []; window.usersAmt = 0;</script>
@@ -52,11 +53,11 @@
             <div id="login_apps" class="app_showcase"></div>
             <div id="ui_shortcuts" style="margin-top:8px;display:flex;gap:12px;">
                 <div id="appletsUi" class="icon" style="cursor:pointer;display:flex;align-items:center;gap:6px;">
-                    <img src="img/assets/applets.png" width="28" height="28"/>
+                    <img src="./img/icons/applets.png" width="28" height="28"/>
                     <span>Applets</span>
                 </div>
                 <div id="logshow" class="icon" style="cursor:pointer;display:flex;align-items:center;gap:6px;">
-                    <img src="img/assets/log_button.webp" width="28" height="28"/>
+                    <img src="./img/icons/log_button.webp" width="28" height="28"/>
                     <span>Message Log</span>
                 </div>
             </div>
@@ -110,23 +111,49 @@
                 <div id="login_apps" class="app_showcase"></div>
             </div>
         </div>
+
+        <div class="page no_selection" id="page_ie" style="display:none;">
+            <div class="message_cont" id="ie_cont">
+                <img src="./img/icons/ie.png" /><br />
+                <br />
+                <h1>Internet Explorer isn't supported!</h1>
+                <br />
+                <br />
+                <b>What is my IE version?&#32;</b><span id="ie_version"></span><br />
+            </div>
+        </div>
     </div>
 
     <div id="titlebar">
         <div id="minimize"></div>
         <div id="maximize"></div>
         <div id="close"></div>
-        <div id="bonzilog_controls" style="position:relative;right:8px;top:6px;display:flex;gap:8px;align-items:center;z-index:9999;">
-            <button id="bonzilog_button" style="background:transparent;border:0;cursor:pointer;padding:0;line-height:0;">
-                <img src="./img/icons/log_button.webp" alt="BonziLog" width="36" height="36"/>
-            </button>
-            <button id="applets_button" style="background:transparent;border:0;cursor:pointer;padding:0;line-height:0;">
-                <img src="./img/icons/applets.png" alt="Applets" width="36" height="36"/>
-            </button>
-        </div>
+    </div>
+
+    <div id="floating_dock">
+        <button id="bonzilog_button" title="BonziLog">
+            <img src="./img/icons/log_button.webp" alt="BonziLog" width="30" height="30"/>
+        </button>
+        <button id="applets_button" title="Applets">
+            <img src="./img/icons/applets.png" alt="Applets" width="30" height="30"/>
+        </button>
     </div>
 
     <script>
+    // IE detection — show #page_ie and block the rest if running in Internet Explorer
+    (function(){
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+        if(isIE){
+            var ver = document.documentMode || (window.ActiveXObject ? "old" : "?");
+            document.addEventListener('DOMContentLoaded', function(){
+                var pg = document.getElementById('page_ie');
+                var sp = document.getElementById('ie_version');
+                if(sp) sp.textContent = ver;
+                if(pg) pg.style.display = '';
+            });
+        }
+    })();
+
     // wire buttons in index.html to clientcommands if present
     (function(){
         function wire(){
