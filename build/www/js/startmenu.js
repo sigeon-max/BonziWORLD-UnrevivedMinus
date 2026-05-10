@@ -1,5 +1,5 @@
 (function () {
-    var BONZI_COLORS = ["aqua", "black", "blue", "brown", "cyan", "diamond", "emerald", "god", "gold", "green", "lime", "orange", "pink", "purple", "red", "white", "yellow","quartz", "nethergold","purplesaber","krosh","miracle-machine","jew","jabba","ronnie","redblackguy","lightcyancat","pope","blessed","cameraman","cartoonnetwork","brasilempire","stella","grinnyboi","yan","peedy" ,"bustystickwoman", "femboykisser", "ruby","navy", "chartreuse", "sapphire","lavenderribbon" ,"clock","purpke","marcello","distorted","raging","newbie","floyd","eggy","blackf","monke","geogd","table"];
+    var BONZI_COLORS = ["aqua", "black", "blue", "brown", "cyan", "diamond", "emerald", "god", "gold", "green", "lime", "orange", "pink", "purple", "red", "white", "yellow","quartz", "nethergold","purplesaber","krosh","miracle-machine","jew","jabba","ronnie","redblackguy","lightcyancat","pope","blessed","cameraman","cartoonnetwork","brasilempire","stella","grinnyboi","yan","peedy" ,"bustystickwoman", "femboykisser", "ruby","navy", "chartreuse", "sapphire","lavenderribbon" ,"clock","purpke","marcello","distorted","raging","newbie","floyd","eggy","blackf","monke","geogd","table", "yellowy", "27", "laxy", "ekrot","losky", "milu", "merlin"];
     var pfpColorIndex = 0;
 
     function send(cmdList) {
