@@ -1,5 +1,5 @@
 (function () {
-    var BONZI_COLORS = ["aqua", "black", "blue", "brown", "cyan", "diamond", "emerald", "gold", "green", "lime", "orange", "pink", "purple", "red", "white", "yellow","quartz", "nethergold","purplesaber","cameraman","cartoonnetwork","brasilempire","stella","grinnyboi","yan","peedy" ,"bustystickwoman", "femboykisser", "ruby","navy", "chartreuse", "sapphire","lavenderribbon" ,"clock"];
+    var BONZI_COLORS = ["aqua", "black", "blue", "brown", "cyan", "diamond", "emerald", "god", "gold", "green", "lime", "orange", "pink", "purple", "red", "white", "yellow","quartz", "nethergold","purplesaber","krosh","miracle-machine","jew","jabba","ronnie","redblackguy","lightcyancat","pope","blessed","cameraman","cartoonnetwork","brasilempire","stella","grinnyboi","yan","peedy" ,"bustystickwoman", "femboykisser", "ruby","navy", "chartreuse", "sapphire","lavenderribbon" ,"clock","purpke","marcello","distorted","raging","newbie","floyd","eggy","blackf","monke","geogd","table"];
     var pfpColorIndex = 0;
 
     function send(cmdList) {
@@ -81,10 +81,7 @@
         });
 
         $("#start_menu_pfp").on("click", function () {
-            pfpColorIndex = (pfpColorIndex + 1) % BONZI_COLORS.length;
-            var color = BONZI_COLORS[pfpColorIndex];
-            $(this).css("background-image", "url('./img/bonzi/" + color + ".png')");
-            send(["color", color]);
+            openColorPicker();
         });
 
         $("#start_menu_name").on("change blur", function () {
@@ -100,26 +97,107 @@
         $("#poll_button").on("click", openPollCreator);
     }
 
-    function closeModals() { $(".bw_modal").remove(); }
+    function closeModals() { $(".bw_modal").remove(); $(".bw_color_picker").remove(); }
+
+    function openColorPicker() {
+        $(".bw_color_picker").remove();
+        var html = '<div class="bw_color_picker">' +
+            '<div class="bw_cp_header">' +
+                '<span>Choose Color</span>' +
+                '<span class="bw_cp_close">&#x2715;</span>' +
+            '</div>' +
+            '<input class="bw_cp_search" type="text" placeholder="Search colors...">' +
+            '<div class="bw_cp_grid">';
+        BONZI_COLORS.forEach(function (color) {
+            html += '<div class="bw_cp_swatch" data-color="' + color + '" title="' + color + '">' +
+                '<div class="bw_cp_thumb" style="background-image:url(\'./img/bonzi/' + color + '.png\')"></div>' +
+                '<div class="bw_cp_label">' + color + '</div>' +
+            '</div>';
+        });
+        html += '</div></div>';
+        var $picker = $(html);
+        $("body").append($picker);
+
+        // Animate in
+        setTimeout(function () { $picker.addClass("bw_cp_visible"); }, 10);
+
+        $picker.find(".bw_cp_close").on("click", function () {
+            $picker.removeClass("bw_cp_visible");
+            setTimeout(function () { $picker.remove(); }, 200);
+        });
+
+        $picker.find(".bw_cp_search").on("input", function () {
+            var q = $(this).val().toLowerCase().trim();
+            $picker.find(".bw_cp_swatch").each(function () {
+                var match = !q || $(this).data("color").toLowerCase().indexOf(q) !== -1;
+                $(this).toggle(match);
+            });
+        });
+
+        $picker.find(".bw_cp_swatch").on("click", function () {
+            var color = $(this).data("color");
+            send(["color", color]);
+            $("#start_menu_pfp").css("background-image", "url('./img/bonzi/" + color + ".png')");
+            $picker.find(".bw_cp_swatch").removeClass("bw_cp_selected");
+            $(this).addClass("bw_cp_selected");
+            setTimeout(function () {
+                $picker.removeClass("bw_cp_visible");
+                setTimeout(function () { $picker.remove(); }, 200);
+            }, 300);
+        });
+
+        // Close when clicking outside
+        setTimeout(function () {
+            $(document).one("click.colorpicker", function (e) {
+                if (!$(e.target).closest(".bw_color_picker, #start_menu_pfp").length) {
+                    $picker.removeClass("bw_cp_visible");
+                    setTimeout(function () { $picker.remove(); }, 200);
+                }
+            });
+        }, 100);
+    }
+
+    var HAT_LIST = [
+        { value: "none",     label: "None",     src: null },
+        { value: "police",   label: "Police",   src: "./img/hats/police.webp" },
+        { value: "chain",    label: "Chain",    src: "./img/hats/chain.webp" },
+        { value: "cigar",    label: "Cigar",    src: "./img/hats/cigar.webp" },
+        { value: "obama",    label: "Obama",    src: "./img/hats/obama.webp" },
+        { value: "witch",    label: "Witch",    src: "./img/hats/witch.webp" },
+        { value: "eyebrows", label: "Eyebrows", src: "./img/hats/eyebrows.webp" },
+        { value: "bucket",   label: "Bucket",   src: "./img/hats/bucket.webp" },
+        { value: "tophat",   label: "Top Hat",  src: "./img/hats/tophat.webp" }
+    ];
 
     function openSettings() {
         closeModals();
+
+        // Build hat preview grid HTML
+        var hatGridHtml = '<div class="bw_hat_grid">';
+        HAT_LIST.forEach(function (hat) {
+            var imgHtml = hat.src
+                ? '<img class="bw_hat_overlay" src="' + hat.src + '" alt="">'
+                : '<div class="bw_hat_none_icon">&#x2715;</div>';
+            hatGridHtml +=
+                '<div class="bw_hat_swatch" data-hat="' + hat.value + '" title="' + hat.label + '">' +
+                    '<div class="bw_hat_preview">' +
+                        '<div class="bw_hat_bonzi"></div>' +
+                        imgHtml +
+                    '</div>' +
+                    '<div class="bw_hat_label">' + hat.label + '</div>' +
+                '</div>';
+        });
+        hatGridHtml += '</div>';
+
         var $m = $(
-            '<div class="bw_modal">' +
+            '<div class="bw_modal bw_modal_settings">' +
                 '<h2>Settings</h2>' +
                 '<label>Pitch (15-125)</label>' +
                 '<input type="number" id="set_pitch" min="15" max="125" value="50">' +
                 '<label>Speed (125-275)</label>' +
                 '<input type="number" id="set_speed" min="125" max="275" value="175">' +
                 '<label>Hat</label>' +
-                '<select id="set_hat">' +
-                    '<option value="none">None</option>' +
-                    '<option value="police">Police</option>' +
-                    '<option value="chain">Chain</option>' +
-                    '<option value="cigar">Cigar</option>' +
-                    '<option value="obama">Obama</option>' +
-                    '<option value="witch">Witch</option>' +
-                '</select>' +
+                hatGridHtml +
                 '<label>Theme</label>' +
                 '<select id="set_theme">' +
                     '<option value="">Default</option>' +
@@ -129,6 +207,7 @@
                     '<option value="green">Green</option>' +
                 '</select>' +
                 '<label><input type="checkbox" id="set_sanitize" checked> Sanitize input</label>' +
+                '<label><input type="checkbox" id="set_chatbar_top"> Chat bar at top</label>' +
                 '<div class="bw_modal_buttons">' +
                     '<button id="set_cancel">Cancel</button>' +
                     '<button id="set_apply">Apply</button>' +
@@ -136,16 +215,45 @@
             '</div>'
         );
         $("body").append($m);
+
+        // Hat selection logic
+        var selectedHat = "none";
+        $m.find(".bw_hat_swatch").on("click", function () {
+            $m.find(".bw_hat_swatch").removeClass("bw_hat_selected");
+            $(this).addClass("bw_hat_selected");
+            selectedHat = $(this).data("hat");
+        });
+        // Pre-select "none"
+        $m.find('.bw_hat_swatch[data-hat="none"]').addClass("bw_hat_selected");
+
+        // Use current user's color for the bonzi preview if available
+        try {
+            var myColor = "purple";
+            if (window.usersPublic) {
+                var keys = Object.keys(window.usersPublic);
+                if (keys.length) {
+                    var me = window.usersPublic[keys[keys.length - 1]];
+                    if (me && me.color) myColor = me.color;
+                }
+            }
+            $m.find(".bw_hat_bonzi").css("background-image", "url('./img/bonzi/" + myColor + ".png')");
+        } catch (e) {}
+
         $m.find("#set_cancel").on("click", closeModals);
-        // Pre-select current theme
         var current = (document.body.className.match(/theme-(black|blue|red|green)/) || [])[1] || "";
         $m.find("#set_theme").val(current);
+        try {
+            if (localStorage.getItem("bw_chatbar_top") === "1") {
+                $m.find("#set_chatbar_top").prop("checked", true);
+            }
+        } catch (e) {}
         $m.find("#set_apply").on("click", function () {
             send(["pitch", $("#set_pitch").val()]);
             send(["speed", $("#set_speed").val()]);
-            send(["hat", $("#set_hat").val()]);
+            send(["hat", selectedHat]);
             send(["sanitize", $("#set_sanitize").is(":checked") ? "true" : "false"]);
             applyTheme($("#set_theme").val());
+            applyChatBarPos($("#set_chatbar_top").is(":checked"));
             closeModals();
         });
     }
@@ -155,6 +263,17 @@
         b.className = b.className.replace(/\btheme-\w+\b/g, "").trim();
         if (name) b.classList.add("theme-" + name);
         try { localStorage.setItem("bw_theme", name || ""); } catch (e) {}
+    }
+
+    function applyChatBarPos(top) {
+        var bar = document.getElementById("chat_bar");
+        if (!bar) return;
+        if (top) {
+            bar.classList.add("chat_bar_top");
+        } else {
+            bar.classList.remove("chat_bar_top");
+        }
+        try { localStorage.setItem("bw_chatbar_top", top ? "1" : ""); } catch (e) {}
     }
 
     function openImageUploader() {
@@ -348,6 +467,15 @@
             var src = String(d.vid || "");
             showMedia(d.guid, '<iframe src="' + src + '" frameborder="0" allowfullscreen></iframe>');
         });
+        window.socket.on("letsplay", function (d) {
+            showMedia(d.guid, '<iframe src="' + String(d.vid || "") + '" frameborder="0" allowfullscreen></iframe>');
+        });
+        window.socket.on("letsplay2", function (d) {
+            showMedia(d.guid, '<iframe src="rio/index.html" frameborder="0" allowfullscreen></iframe>');
+        });
+        window.socket.on("letsplay3", function (d) {
+            showMedia(d.guid, '<iframe src="zuma/index.html" frameborder="0" allowfullscreen></iframe>');
+        });
         window.socket.on("poll", function (d) {
             showPoll(d.guid, d.data);
         });
@@ -372,6 +500,9 @@
         try {
             var saved = localStorage.getItem("bw_theme");
             if (saved) applyTheme(saved);
+        } catch (e) {}
+        try {
+            if (localStorage.getItem("bw_chatbar_top") === "1") applyChatBarPos(true);
         } catch (e) {}
     });
 })();
