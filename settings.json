@@ -1,112 +1,112 @@
 {
-	"prefs": {
-		"public": {
-			"char_limit": 12000,
-			"name_limit": 100,
-			"godword": null,
-			"runlevel": {
-				"godmode": 0,
-				"youtube": 0,
-				"sanitize": 3,
-				"joke": 0,
-				"fact": 0,
-				"backflip": 0,
-				"color": 0,
-				"asshole": 0,
-				"triggered": 0,
-				"linux": 0,
-				"pitch": 0,
-				"speed": 0,
-				"pawn": 0,
-				"bees": 0,
-				"vaporwave": 0,
-				"unvaporwave": 0,
-				"name": 0,
-				"pope": 3,
-				"video": 0,
-				"img": 0,
-				 "ban": 3,
-				"kick": 3,
-				"doggis": 3
-			},
-			"room_max": 100000,
-			"owner": null,
-			"pitch": {
-				"max": 125,
-				"min": 15,
-				"default": "random"
-			},
-			"speed": {
-				"max": 275,
-				"min": 125,
-				"default": "random"
-			},
-			"defaultName": "Anonymous"
-		},
-		"private": {
-			"char_limit": 12000,
-			"name_limit": 100,
-			"godword": null,
-			"runlevel": {
-				"godmode": 0,
-				"youtube": 0,
-				"sanitize": 3,
-				"joke": 0,
-				"fact": 0,
-				"backflip": 0,
-				"color": 0,
-				"asshole": 0,
-				"triggered": 0,
-				"linux": 0,
-				"pitch": 0,
-				"speed": 0,
-				"pawn": 0,
-				"bees": 0,
-				"vaporwave": 0,
-				"unvaporwave": 0,
-				"name": 0,
-				"pope": 3,
-				"video": 0,
-				"img": 0,
-				"ban": 3,
-				"kick": 3,
-				"doggis": 3
-			},
-			"room_max": 100000,
-			"owner": null,
-			"pitch": {
-				"max": 125,
-				"min": 15,
-				"default": "random"
-			},
-			"speed": {
-				"max": 275,
-				"min": 125,
-				"default": "random"
-			},
-			"defaultName": "Anonymous"
-		}
-	},
-	"consoleOutput": false,
-	"log": {
-		"info": {
-			"level": "info",
-			"filename": "./logs/info.log",
-			"maxsize": "1024000",
-			"maxFiles": "3",
-		"handleExceptions": true,
-		"humanReadableUnhandledException": true
-		},
-		"access": {
-			"level": "info",
-			"filename": "./logs/access.log",
-			"maxsize": "1024000",
-			"maxFiles": "3",
-		"handleExceptions": true,
-		"humanReadableUnhandledException": true
-		}
-	},
-	"bonziColors": [
+        "prefs": {
+                "public": {
+                        "char_limit": 12000,
+                        "name_limit": 100,
+                        "godword": null,
+                        "runlevel": {
+                                "godmode": 0,
+                                "youtube": 0,
+                                "sanitize": 3,
+                                "joke": 0,
+                                "fact": 0,
+                                "backflip": 0,
+                                "color": 0,
+                                "asshole": 0,
+                                "triggered": 0,
+                                "linux": 0,
+                                "pitch": 0,
+                                "speed": 0,
+                                "pawn": 0,
+                                "bees": 0,
+                                "vaporwave": 0,
+                                "unvaporwave": 0,
+                                "name": 0,
+                                "pope": 3,
+                                "video": 0,
+                                "img": 0,
+                                 "ban": 3,
+                                "kick": 3,
+                                "doggis": 3
+                        },
+                        "room_max": 100000,
+                        "owner": null,
+                        "pitch": {
+                                "max": 125,
+                                "min": 15,
+                                "default": "random"
+                        },
+                        "speed": {
+                                "max": 275,
+                                "min": 125,
+                                "default": "random"
+                        },
+                        "defaultName": "Anonymous"
+                },
+                "private": {
+                        "char_limit": 12000,
+                        "name_limit": 100,
+                        "godword": null,
+                        "runlevel": {
+                                "godmode": 0,
+                                "youtube": 0,
+                                "sanitize": 3,
+                                "joke": 0,
+                                "fact": 0,
+                                "backflip": 0,
+                                "color": 0,
+                                "asshole": 0,
+                                "triggered": 0,
+                                "linux": 0,
+                                "pitch": 0,
+                                "speed": 0,
+                                "pawn": 0,
+                                "bees": 0,
+                                "vaporwave": 0,
+                                "unvaporwave": 0,
+                                "name": 0,
+                                "pope": 3,
+                                "video": 0,
+                                "img": 0,
+                                "ban": 3,
+                                "kick": 3,
+                                "doggis": 3
+                        },
+                        "room_max": 100000,
+                        "owner": null,
+                        "pitch": {
+                                "max": 125,
+                                "min": 15,
+                                "default": "random"
+                        },
+                        "speed": {
+                                "max": 275,
+                                "min": 125,
+                                "default": "random"
+                        },
+                        "defaultName": "Anonymous"
+                }
+        },
+        "consoleOutput": false,
+        "log": {
+                "info": {
+                        "level": "info",
+                        "filename": "./logs/info.log",
+                        "maxsize": "1024000",
+                        "maxFiles": "3",
+                "handleExceptions": true,
+                "humanReadableUnhandledException": true
+                },
+                "access": {
+                        "level": "info",
+                        "filename": "./logs/access.log",
+                        "maxsize": "1024000",
+                        "maxFiles": "3",
+                "handleExceptions": true,
+                "humanReadableUnhandledException": true
+                }
+        },
+        "bonziColors": [
 "aqua",
 "black",
 "blue", 
@@ -146,12 +146,23 @@
 "chartreuse", 
 "sapphire",
 "lavenderribbon",
-			"purplesaber",
-			"clock"
-	],
-	"banLength": 1440,
-	"port": 3000,
-	"express": {
-		"serveStatic": true
-	}
+                        "purplesaber",
+                        "clock",
+                        "purpke",
+                        "marcello",
+                        "distorted",
+                        "raging",
+                        "newbie",
+                        "floyd",
+                        "eggy",
+                        "blackf",
+                        "monke",
+                        "geogd",
+                        "table"
+        ],
+        "banLength": 1440,
+        "port": 3000,
+        "express": {
+                "serveStatic": true
+        }
 }
